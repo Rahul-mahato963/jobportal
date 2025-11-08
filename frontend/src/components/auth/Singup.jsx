@@ -55,9 +55,17 @@ const Singup = () => {
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
-    } finally {
+  console.log(error);
+
+  if (error.response && error.response.data) {
+    toast.error(error.response.data.message);
+  } else if (error.request) {
+    toast.error("No response from server. Check your backend or network.");
+  } else {
+    toast.error("Something went wrong: " + error.message);
+  }
+}
+ finally {
       dispatch(setLoading(false));
     }
   }
@@ -81,7 +89,7 @@ const Singup = () => {
               value={input.fullname}
               name="fullname"
               onChange={changeEventHandler}
-              placeholder="patel"
+              placeholder="Rahul Kumar Mahato"
             />
           </div>
           <div className='my-2'>
@@ -91,7 +99,7 @@ const Singup = () => {
               value={input.email}
               name="email"
               onChange={changeEventHandler}
-              placeholder="patel@gmail.com"
+              placeholder="rahulmahaseth146@gmail.com"
             />
           </div>
           <div className='my-2'>
@@ -101,7 +109,7 @@ const Singup = () => {
               value={input.phoneNumber}
               name="phoneNumber"
               onChange={changeEventHandler}
-              placeholder="+918080808080"
+              placeholder="9263632325"
             />
           </div>
           <div className='my-2'>
@@ -111,7 +119,7 @@ const Singup = () => {
               value={input.password}
               name="password"
               onChange={changeEventHandler}
-              placeholder="password"
+              placeholder="keep strong password"
             />
           </div>
           <div className='flex items-center justify-between'>
